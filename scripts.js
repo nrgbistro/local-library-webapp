@@ -70,7 +70,7 @@ function submitNewBookForm() {
 	addBookToLibrary(newBook);
 	toggleBookForm();
 	displayBooks();
-	console.log(myLibrary);
+	console.log(`Current library: ${myLibrary}`);
 }
 
 

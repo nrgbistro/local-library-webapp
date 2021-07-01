@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Library</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="scripts.js"></script>
+	<meta charset="UTF-8">
+	<title>Library</title>
+	<link rel="stylesheet" href="styles.css">
+	<script defer src="scripts.js"></script>
 </head>
 <body>
 <div id="bookContainer"></div>
 <div id="buttonContainer">
-    <button id="newBook" onclick="toggleBookForm()">Create New Book</button>
-    <button id="removeBook">Remove Book</button>
+	<button id="newBook" onclick="toggleBookForm()">Create New Book</button>
+	<button id="removeBook">Remove Book</button>
 </div>
 <div id="bookForm">
-    Title: <input id="title" type="text" value="">
-    Author: <input id="author" type="text" value="">
-    Year: <input id="year" type="text" value="">
-    <button id="submitBook" value="submitBook" onclick="submitNewBookForm()">Submit</button>
+	<label for="title">Title: </label><input id="title" type="text" value="">
+	<label for="author">Author: </label><input id="author" type="text" value="">
+	<label for="year">Year: </label><input id="year" type="text" value="">
+	<button id="submitBook" value="submitBook" onclick="submitNewBookForm()">Submit</button>
 </div>
 <div id="grayedBackground"></div>
 </body>

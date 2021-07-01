@@ -58,8 +58,8 @@ div#bookForm {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 15vh;
-    height: 20vh;
+    width: 25vw;
+    height: 100vh;
     background-color: red;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%); /* IE 9 */
