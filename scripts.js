@@ -8,6 +8,9 @@ function Book(title = "", author = "", year = 0) {
 	this.author = author;
 	this.year = year;
 	this.id = generateUID();
+	this.getId = function() {
+		return this.id;
+	}
 
 }
 
@@ -20,11 +23,16 @@ function addBookToLibrary(book) {
 // and appends the new book container to the bookshelf
 function displayBooks() {
 	let bookContainer = document.querySelector("#bookContainer");
-	removeAllChildNodes(bookContainer);
+
+	// Resets display
+	while (bookContainer.firstChild) {
+		bookContainer.removeChild(bookContainer.firstChild);
+	}
+
+	// Creates div elements based on myLibrary and appends them to the bookContainer
 	for (let i = 0; i < myLibrary.length; i++) {
 		let newBook = document.createElement("div");
 		newBook.classList.add(("book"));
-		newBook.id = generateUID();
 		const title = document.createElement("h1");
 		title.innerText = myLibrary[i].title;
 		title.id = myLibrary[i].title;
@@ -38,6 +46,8 @@ function displayBooks() {
 		newBook.append(title);
 		newBook.append(author);
 		newBook.append(year);
+
+		newBook.addEventListener("click", removeCurrentBook);
 
 		bookContainer.append(newBook);
 	}
@@ -70,7 +80,9 @@ function submitNewBookForm() {
 	addBookToLibrary(newBook);
 	toggleBookForm();
 	displayBooks();
-	console.log(`Current library: ${myLibrary}`);
+	console.log(myLibrary);
+	console.log(mySortedLibrary);
+	console.log(`Current book.id: ${newBook.getId()}`)
 }
 
 
@@ -85,12 +97,22 @@ function generateUID() {
 	return firstPart + secondPart;
 }
 
-function removeAllChildNodes(parent) {
-	while (parent.firstChild) {
-		parent.removeChild(parent.firstChild);
+function toggleRemoveMode() {
+	const removeButton = document.querySelector("#removeBook");
+	if(removeButton.classList.contains("clicked")) {
+		removeButton.classList.remove("clicked");
+	}
+	else {
+		removeButton.classList.add("clicked");
 	}
 }
 
+function removeCurrentBook() {
+	console.log(this);
+}
+
+
+// Default loading scripts to run once per page load
 function init() {
 	displayBooks();
 	toggleBookForm();
@@ -99,7 +121,5 @@ function init() {
 	grayContainer.onclick = function () {
 		toggleBookForm();
 	};
-
 }
-
 init();

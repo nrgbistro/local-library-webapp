@@ -59,7 +59,7 @@ div#bookForm {
     top: 50%;
     left: 50%;
     width: 25vw;
-    height: 100vh;
+    height: 70vh;
     background-color: red;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%); /* IE 9 */
@@ -75,4 +75,12 @@ div#grayedBackground {
     width: 100vw;
     height: 100vh;
     z-index: 500;
+}
+
+div.removeMode {
+
+}
+
+button.clicked {
+    background-color: rgba(255, 255, 255, 0.1);
 }
