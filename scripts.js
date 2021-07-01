@@ -1,5 +1,5 @@
 let myLibrary = [];
-let mySortedLibrary = [];
+let removeMode = false;
 
 
 // Book object constructor
@@ -7,10 +7,10 @@ function Book(title = "", author = "", year = 0) {
 	this.title = title;
 	this.author = author;
 	this.year = year;
-	this.id = generateUID();
-	this.getId = function() {
-		return this.id;
-	}
+	this.uid = generateUID();
+	this.getUID = function () {
+		return this.uid;
+	};
 
 }
 
@@ -21,7 +21,7 @@ function addBookToLibrary(book) {
 
 // Loops through all the books in the library, creates a book container for them,
 // and appends the new book container to the bookshelf
-function displayBooks() {
+function updateBookDisplay() {
 	let bookContainer = document.querySelector("#bookContainer");
 
 	// Resets display
@@ -32,7 +32,9 @@ function displayBooks() {
 	// Creates div elements based on myLibrary and appends them to the bookContainer
 	for (let i = 0; i < myLibrary.length; i++) {
 		let newBook = document.createElement("div");
+		newBook.id = myLibrary[i].getUID();
 		newBook.classList.add(("book"));
+		if (removeMode) newBook.classList.add("bookRemoveMode");
 		const title = document.createElement("h1");
 		title.innerText = myLibrary[i].title;
 		title.id = myLibrary[i].title;
@@ -63,7 +65,7 @@ function toggleBookForm() {
 	for (let i = 0; i < toggleList.length; i++) {
 		let x = toggleList[i];
 		if (x.style.display === "none") {
-			x.style.display = "block";
+			x.style.display = "flex";
 		} else {
 			x.style.display = "none";
 		}
@@ -79,10 +81,38 @@ function submitNewBookForm() {
 	let newBook = new Book(title, author, year);
 	addBookToLibrary(newBook);
 	toggleBookForm();
-	displayBooks();
-	console.log(myLibrary);
-	console.log(mySortedLibrary);
-	console.log(`Current book.id: ${newBook.getId()}`)
+	updateBookDisplay();
+}
+
+
+function toggleRemoveMode() {
+	const removeButton = document.querySelector("#removeBook");
+	removeMode = removeButton.classList.toggle("buttonRemoveMode");
+
+	const books = document.querySelectorAll(".book");
+	for (let i = 0; i < books.length; i++) {
+		let book = books.item(i);
+		book.classList.toggle("bookRemoveMode");
+	}
+
+}
+
+function removeCurrentBook() {
+	if (removeMode) {
+		const targetId = String(this.id);
+		console.log(`Target id: ${targetId}`);
+
+		// Reverse-order search for book object that matches with the clicked book uid
+		for (let i = myLibrary.length - 1; i >= 0; i--) {
+			let searchId = myLibrary[i].getUID();
+			console.log(`Search id: ${searchId}`);
+			if (targetId === searchId) {
+				myLibrary.splice(i, 1);
+				break;
+			}
+		}
+		updateBookDisplay();
+	}
 }
 
 
@@ -97,24 +127,15 @@ function generateUID() {
 	return firstPart + secondPart;
 }
 
-function toggleRemoveMode() {
-	const removeButton = document.querySelector("#removeBook");
-	if(removeButton.classList.contains("clicked")) {
-		removeButton.classList.remove("clicked");
-	}
-	else {
-		removeButton.classList.add("clicked");
-	}
-}
-
-function removeCurrentBook() {
-	console.log(this);
-}
-
-
 // Default loading scripts to run once per page load
 function init() {
-	displayBooks();
+	for (let i = 0; i < 10 ; i++) {
+		let defaultBook = new Book(`Default Book ${i + 1}`, `Nolan Gelinas`, `2021`);
+		defaultBook.uid = i + 1;
+		addBookToLibrary(defaultBook);
+	}
+
+	updateBookDisplay();
 	toggleBookForm();
 
 	let grayContainer = document.querySelector("#grayedBackground");
@@ -122,4 +143,5 @@ function init() {
 		toggleBookForm();
 	};
 }
+
 init();

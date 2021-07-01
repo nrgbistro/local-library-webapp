@@ -4,19 +4,25 @@
 	<meta charset="UTF-8">
 	<title>Library</title>
 	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="developmentStyles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script defer src="scripts.js"></script>
 </head>
 <body>
-<div id="bookContainer"></div>
-<div id="buttonContainer">
-	<button id="newBook" onclick="toggleBookForm()">Create New Book</button>
-	<button id="removeBook" onclick="toggleRemoveMode()">Remove Book</button>
-</div>
+	<div id="parentContainer">
+		<div id="bookContainer"></div>
+		<div id="buttonContainer">
+			<button id="newBook" onclick="toggleBookForm()">Create New Book</button>
+			<button id="removeBook" onclick="toggleRemoveMode()">Remove Book Mode</button>
+		</div>
+	</div>
+
 <div id="bookForm">
+	<h1>Create New Book</h1>
 	<label for="title">Title: </label><input id="title" type="text" value="">
 	<label for="author">Author: </label><input id="author" type="text" value="">
 	<label for="year">Year: </label><input id="year" type="text" value="">
-	<button id="submitBook" value="submitBook" onclick="submitNewBookForm()">Submit</button>
+	<button id="submitBook" value="submitBook" onclick="submitNewBookForm()">Create New Book</button>
 </div>
 <div id="grayedBackground"></div>
 </body>

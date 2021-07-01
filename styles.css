@@ -1,5 +1,10 @@
+:root {
+    --main-bg-color: 240, 160, 121;
+}
+
 div {
     border: 2px black solid;
+    font-family: sans-serif;
 }
 
 html, body, div {
@@ -21,12 +26,17 @@ button {
 }
 
 button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+#removeBook.buttonRemoveMode:hover {
+    background-color: rgba(255, 0, 0, 0.75);
 }
 
 div#bookContainer {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     width: 100%;
     height: 90vh;
 }
@@ -43,6 +53,7 @@ div.book {
 
 
 div.book * {
+    margin: 10px;
     font-family: sans-serif;
     text-align: center;
     text-transform: capitalize;
@@ -56,15 +67,39 @@ div.book h1 {
 
 div#bookForm {
     position: absolute;
+    flex-direction: column;
+    padding-top: 20px;
     top: 50%;
     left: 50%;
-    width: 25vw;
-    height: 70vh;
-    background-color: red;
+    background-color: rgba(var(--main-bg-color), 1);
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%); /* IE 9 */
     -webkit-transform: translate(-50%, -50%); /* Chrome, Safari, Opera */
     z-index: 1000;
+}
+
+div#bookForm * {
+    margin: 0 5vw;
+    flex-grow: 1;
+}
+div#bookForm input {
+    min-height: 36px;
+    max-height: 36px;
+}
+
+div#bookForm label, div#bookForm h1 {
+    font-size: 2em;
+    flex-grow: unset;
+}
+
+div#bookForm > #submitBook {
+    margin: 10px 5vw;
+    max-height: 100px;
+}
+
+#parentContainer {
+    display: flex;
+    flex-direction: column;
 }
 
 div#grayedBackground {
@@ -77,10 +112,6 @@ div#grayedBackground {
     z-index: 500;
 }
 
-div.removeMode {
-
-}
-
-button.clicked {
-    background-color: rgba(255, 255, 255, 0.1);
+#buttonContainer {
+    background-color: white;
 }
